@@ -169,13 +169,6 @@
 	</div>
 	<script>
 		window.addEventListener("load", (event) => {
-			function killLoader() {
-				var loadscreen = document.querySelector(".loadscreen");
-				setTimeout(function() {
-					loadscreen.parentNode.removeChild(loadscreen);
-				}, 2500);
-			}
-			killLoader();
 			async function loadGallery() {
 				var grid = document.createElement("div");
 				grid.classList.add("grid");
@@ -192,16 +185,17 @@
 					grid.appendChild(imageContainer);
 					imageContainer.appendChild(newImage);
 				}
-				var reloadImages = document.querySelectorAll("img");
-				reloadImages.forEach(image => {
-					image.src = image.src + "#mobilepatch=" + new Date().getTime();
-				}); 
 				var images = document.querySelectorAll("img");
 				images.forEach(image => {
 					image.addEventListener('click', function() {
 						window.open(image.src);
 					});
 				});
+				function killLoader() {
+					var loadscreen = document.querySelector(".loadscreen");
+					loadscreen.parentNode.removeChild(loadscreen);
+				}
+				killLoader();
 			}
 			loadGallery();
 		});
