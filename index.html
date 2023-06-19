@@ -179,7 +179,7 @@
 				var galleryImages = JSON.parse(objString);
 				for (var i = 0; i < galleryImages.data.length; i++) {
 					var newImage = document.createElement("img");
-					newImage.src = "https://drive.google.com/uc?export=view&id=" + galleryImages.data[i].img_id;
+					newImage.src = "https://lh3.googleusercontent.com/d/" + galleryImages.data[i].img_id;
 					var imageContainer = document.createElement("div");
 					imageContainer.classList.add("image");
 					grid.appendChild(imageContainer);
