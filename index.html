@@ -175,8 +175,6 @@
 				document.body.prepend(grid);
 				let url = 'https://script.google.com/macros/s/AKfycbwx0_sW72-Jq8VKEjevaAfCTfTpGkgZxEjQ05E5TFwGBk4Tq-qs8JaQlyNNLN3bSBSz/exec';
 				let obj = await (await fetch(url)).json();
-				console.log(obj);
-				setTimeout(function() {
 				var objString = JSON.stringify(obj);
 				var galleryImages = JSON.parse(objString);
 				for (var i = 0; i < galleryImages.data.length; i++) {
@@ -198,7 +196,6 @@
 					loadscreen.parentNode.removeChild(loadscreen);
 				}
 				killLoader();
-			}, 5000);
 			}
 			loadGallery();
 		});
