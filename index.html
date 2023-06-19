@@ -177,6 +177,7 @@
 				let obj = await (await fetch(url)).json();
 				var objString = JSON.stringify(obj);
 				var galleryImages = JSON.parse(objString);
+				setTimeout(function() {
 				for (var i = 0; i < galleryImages.data.length; i++) {
 					var newImage = document.createElement("img");
 					newImage.src = "https://drive.google.com/uc?export=view&id=" + galleryImages.data[i].img_id;
@@ -185,6 +186,7 @@
 					grid.appendChild(imageContainer);
 					imageContainer.appendChild(newImage);
 				}
+				}, 2000);
 				var images = document.querySelectorAll("img");
 				images.forEach(image => {
 					image.addEventListener('click', function() {
