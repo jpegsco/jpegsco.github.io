@@ -192,6 +192,10 @@
 					grid.appendChild(imageContainer);
 					imageContainer.appendChild(newImage);
 				}
+				var reloadImages = document.querySelectorAll("img");
+				reloadImages.forEach(image => {
+					image.src = image.src + "#mobilepatch=" + new Date().getTime();
+				}); 
 				var images = document.querySelectorAll("img");
 				images.forEach(image => {
 					image.addEventListener('click', function() {
