@@ -33,8 +33,8 @@
 		.grid {
 			display: flex;
 			flex-wrap: wrap;
-			max-width: 1064px;
 			margin: auto;
+			max-width: 1064px;
 		}
 
 		.grid .image {
@@ -43,21 +43,19 @@
 
 		.grid img {
 			position: relative;
-			margin: auto;
-			padding-top: 12.5px;
-			padding-bottom: 12.5px;
-			padding-left: 15px;
-			padding-right: 15px;
-			width: 330px;
-			height: 330px;
+			margin: 0 auto;
+			padding-top: 27px;
+			padding-bottom: 27px;
+			width: 300px;
+			height: 300px;
 			left: 50%;
 			transform: translateX(-50%);
 			object-fit: cover;
-			border-radius: 25px;
+			transition: all 0.25s ease-out;
 
 		}
 
-		@media screen and (max-width: 1064px) {
+		@media screen and (max-width: 1115px) {
 			.grid {
 				max-width: 854px;
 			}
@@ -67,27 +65,28 @@
 			}
 
 			.grid img {
-				width: 400px;
-				height: 400px;
+				width: 372.5px;
+				height: 372.5px;
 			}
 		}
 
-		@media screen and (max-width: 854px) {
+		@media screen and (max-width: 905px) {
+			.grid {
+				max-width: 100%
+			}
+
 			.grid .image {
-				width: calc(100% / 1);
+				width: calc(100% / 2);
 			}
 
 			.grid img {
-				width: 470px;
-				height: 470px;
-			}
-		}
-
-		@media screen and (max-width: 480px) {
-			.grid img {
-				width: 300px;
-				height: 300px;
-				border-radius: 30px;
+				padding-top: 2.75vw;
+				padding-bottom: 2.75vw;
+				padding-left: 2.5vw;
+				padding-right: 2.5vw;
+				width: calc(100vw - 57vw);
+				height: calc(100vw - 57vw);
+				transition: none;
 			}
 		}
 
