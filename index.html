@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link rel="manifest" href="./site.webmanifest">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allura">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
     <script src="https://kit.fontawesome.com/0027766915.js" crossorigin="anonymous"></script>
     <style>
         /*Gallery*/
@@ -82,10 +82,8 @@
             }
 
             .grid img {
-                padding-top: 2.75vw;
-                padding-bottom: 2.75vw;
-                padding-left: 2.5vw;
-                padding-right: 2.5vw;
+                padding-top: 3.5vw;
+                padding-bottom: 3.5vw;
                 width: calc(100vw - 57vw);
                 height: calc(100vw - 57vw);
             }
@@ -163,7 +161,7 @@
             display: block;
             position: relative;
             margin-top: 40px;
-            margin-bottom: 100px;
+            margin-bottom: 80px;
             width: 100%;
             height: auto;
             z-index: 999;
@@ -171,19 +169,23 @@
         }
 
         h1 {
+        	display: block;
             position: relative;
+            margin-top: 0px;
+            margin-bottom: 20px;
             font-size: 40pt;
-            font-family: "Allura";
+            font-family: "Pacifico";
             text-align: center;
             color: white;
         }
 
         .headerIconsContainer {
+        	display: block;
             position: relative;
-            margin-top: -25px;
         }
 
         .headerIconsContainer .headerIcons {
+        	display: block;
             position: absolute;
             margin: auto;
             left: 50%;
@@ -191,20 +193,22 @@
         }
 
         .headerIconsContainer .headerIcons a {
+        	display: inline-block;
             text-decoration: none;
         }
 
         .headerIconsContainer .headerIcons i {
+        	display: block;
             padding-left: 3px;
             padding-right: 3px;
             font-size: 18pt;
-            color: white;
+            color: #FFFFFF;
             border-radius: 20px;
         }
 
         @media screen and (max-width: 480px) {
             h1 {
-                font-size: 32pt;
+                font-size: 28pt;
             }
         }
 
@@ -222,16 +226,18 @@
 		}
 
 		footer a {
+			display: inline-block;
 			text-decoration: none;
 			color: #CCCCCC;
 		}
 
 		.footertext {
+			display: block;
 			position: relative;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-			color: white;
+			color: #FFFFFF;
 			font-family: "Helvetica";
 			font-size: 12pt;
 			text-align: center;
