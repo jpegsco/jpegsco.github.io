@@ -193,7 +193,7 @@
             position: relative;
             margin: 0 auto;
             padding-top: 20px;
-            padding-bottom: 40px;
+            padding-bottom: 20px;
             font-size: 40pt;
             font-family: "Pacifico";
             text-align: center;
@@ -231,7 +231,7 @@
             position: relative;
             display: block;
             margin-top: 20px;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
             width: 100%;
             z-index: 999;
         }
@@ -257,9 +257,8 @@
             color: rgba(255, 255, 255, 1.0);
         }
 
-        .filters .dropbtn {
+        .filters .dropdown {
             position: absolute;
-            margin-bottom: 20px;
             right: 20px;
             color: #FFFFFF;
             font-size: 30pt;
@@ -268,7 +267,7 @@
             z-index: 999;
         }
 
-        .filters .dropdown-content {
+        .filters .dropdownContent {
             display: none;
             position: fixed;
             width: 100%;
@@ -280,17 +279,17 @@
             z-index: 999;
         }
 
-        .filters .dropdown-background {
-            display: block;
+        .filters .dropdownBackground {
+            display: none;
             position: fixed;
             width: 100%;
             height: 100%;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(62, 63, 66, 0.6);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             z-index: 1;
         }
 
@@ -343,8 +342,8 @@
         </div>
     </div>
     <div class="filters">
-        <i class="dropbtn fa-solid fa-bars"></i>
-        <div class="dropdown-content">
+        <i class="dropdown fa-solid fa-bars"></i>
+        <div class="dropdownContent">
             <a class="filterName" name="all">all</a>
             <a class="filterName" name="nature">nature</a>
             <a class="filterName" name="wildlife">wildlife</a>
@@ -352,7 +351,7 @@
             <a class="filterName" name="street">street</a>
             <a class="filterName" name="">portrait</a>
         </div>
-        <div class="dropdown-background"></div>
+        <div class="dropdownBackground"></div>
     </div>
     <header>
         <div class="headerIconsContainer">
@@ -445,13 +444,15 @@
                 }
             }
         });
-        var dropdown = document.querySelector(".dropbtn");
-        dropdownFilters = document.querySelector(".dropdown-content");
+        var dropdown = document.querySelector(".dropdown");
+        var dropdownContent = document.querySelector(".dropdownContent");
+        var dropdownBackground = document.querySelector(".dropdownBackground");
         dropdownStatus = "closed";
         dropdown.onclick = function() {
             if (dropdownStatus === "closed") {
                 dropdown.classList.add("fa-xmark");
-                dropdownFilters.style.display = "block";
+                dropdownContent.style.display = "block";
+                dropdownBackground.style.display = "block";
                 document.body.classList.add("stop-scrolling");
                 setTimeout(function() {
                     dropdownStatus = "open";
@@ -459,7 +460,8 @@
             }
             else {
                 dropdown.classList.remove("fa-xmark");
-                dropdownFilters.style.display = "none";
+                dropdownContent.style.display = "none";
+                dropdownBackground.style.display = "none";
                 document.body.classList.remove("stop-scrolling");
                 setTimeout(function() {
                     dropdownStatus = "closed";
