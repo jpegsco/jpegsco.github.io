@@ -252,6 +252,10 @@
             opacity: 80%;
         }
 
+        .filters .selected {
+            opacity: 60%;
+        }
+
         @media screen and (max-width: 480px) {
             header h1 {
                 font-size: 28pt;
@@ -377,10 +381,17 @@
             });
         }
         var filters = document.querySelectorAll(".filterName");
+        filters[0].classList.add("selected");
         filters.forEach(filter => {
             filter.onclick = e => {
-                var selection = e.target.getAttribute("name");
-                if (selection === "all") {
+                console.log(filters);
+                filters.forEach(filter => {
+                    filter.classList.remove("selected");
+                });
+                var selection = e.target;
+                selection.classList.add("selected");
+                var name = selection.getAttribute("name");
+                if (name === "all") {
                     var imageCache = localStorage.getItem("imageCache");
                     var replaceCache = document.querySelector(".grid").innerHTML = imageCache;
                     setClickableImages();
@@ -389,7 +400,7 @@
                     var replaceCache = document.querySelector(".grid").innerHTML = imageCache;
                     var images = document.querySelectorAll("img");
                     images.forEach(image => {
-                        if (image.getAttribute("alt").includes(selection) != true) {
+                        if (image.getAttribute("alt").includes(name) != true) {
                             image.parentNode.remove();
                         }
                     });
