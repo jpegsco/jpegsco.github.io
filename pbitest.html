@@ -183,7 +183,6 @@
             width: 100%;
             height: auto;
             z-index: 99;
-            background: #202124;
         }
 
         header h1 {
@@ -227,8 +226,18 @@
         .filters {
             display: block;
             position: relative;
-            margin-bottom: 30px;
             z-index: 999;
+        }
+
+        .filters h2 {
+            display: block;
+            position: relative;
+            margin-top: 0px;
+            margin-bottom: 20px;
+            font-size: 20pt;
+            font-family: "Pacifico";
+            text-align: center;
+            color: white;
         }
 
         .filters .filterList {
@@ -240,6 +249,7 @@
 
         .filters .filterName {
             display: inline-block;
+            padding-bottom: 35px;
             padding-left: 10px;
             padding-right: 10px;
             font-family: "Open Sans", sans-serif;
@@ -258,12 +268,7 @@
                 font-size: 28pt;
             }
 
-            .filters {
-                margin-bottom: 0px;
-            }
-
             .filters .filterName {
-                padding-bottom: 35px;
                 padding-left: 5px;
                 padding-right: 5px;
             }
@@ -278,8 +283,9 @@
             transform: translateX(-50%);
             width: 100%;
             height: 80px;
+            bottom: 0;
             background-color: #1D1D1D;
-            z-index: 1;
+            z-index: -1;
         }
 
         footer a {
@@ -327,12 +333,14 @@
         </div>
     </header>
     <div class="filters">
+        <h2>Filter</h2>
         <ul class="filterList">
             <li class="filterName" name="all">All</li>
             <li class="filterName" name="nature">Nature</li>
             <li class="filterName" name="wildlife">Wildlife</li>
             <li class="filterName" name="architecture">Architecture</li>
             <li class="filterName" name="street">Street</li>
+            <li class="filterName" name="">Portrait</li>
         </ul>
     </div>
     <div class="endOfImages">
