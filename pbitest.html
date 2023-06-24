@@ -1,4 +1,3 @@
-
 <html>
 
 <head>
@@ -11,8 +10,29 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link rel="manifest" href="./site.webmanifest">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans">
     <script src="https://kit.fontawesome.com/0027766915.js" crossorigin="anonymous"></script>
     <style>
+        html {
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FF0000;
+        }
+
+        body {
+            margin: 0;
+            background: #202124;
+            overflow-x: hidden;
+        }
+
         /*Loader*/
 
         .loadscreen {
@@ -54,6 +74,7 @@
         }
 
         @-webkit-keyframes sk-bouncedelay {
+
             0%,
             80%,
             100% {
@@ -66,6 +87,7 @@
         }
 
         @keyframes sk-bouncedelay {
+
             0%,
             80%,
             100% {
@@ -80,26 +102,6 @@
         }
 
         /*Gallery*/
-
-        html {
-            overflow: scroll;
-            overflow-x: hidden;
-        }
-
-        ::-webkit-scrollbar {
-            width: 0;
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #FF0000;
-        }
-
-        body {
-            margin: 0;
-            background: #202124;
-            overflow-x: hidden;
-        }
 
         .grid {
             display: flex;
@@ -180,7 +182,7 @@
             margin-bottom: 80px;
             width: 100%;
             height: auto;
-            z-index: 999;
+            z-index: 99;
             background: #202124;
         }
 
@@ -220,6 +222,34 @@
             font-size: 18pt;
             color: #FFFFFF;
             border-radius: 20px;
+        }
+
+        .filters {
+            display: block;
+            position: relative;
+            margin-bottom: 30px;
+            z-index: 999;
+        }
+
+        .filters .filterList {
+            display: block;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .filters .filterName {
+            display: inline-block;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+
+        .filters .filterName:hover {
+            opacity: 80%;
         }
 
         @media screen and (max-width: 480px) {
@@ -269,6 +299,12 @@
             <div class="bounce3"></div>
         </div>
     </div>
+    <select id="cars" name="carlist">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+    </select>
     <header>
         <h1>Pictured By Isaac</h1>
         <div class="headerIconsContainer">
@@ -285,6 +321,15 @@
             </div>
         </div>
     </header>
+    <div class="filters">
+        <ul class="filterList">
+            <li class="filterName" name="all">All</li>
+            <li class="filterName" name="nature">Nature</li>
+            <li class="filterName" name="wildlife">Wildlife</li>
+            <li class="filterName" name="architecture">Architecture</li>
+            <li class="filterName" name="street">Street</li>
+        </ul>
+    </div>
     <div class="endOfImages">
         <h2>That's all folks!</h2>
     </div>
@@ -296,27 +341,26 @@
             async function loadGallery() {
                 var grid = document.createElement("div");
                 grid.classList.add("grid");
-                var header = document.querySelector("header");
-                header.parentNode.insertBefore(grid, header.nextSibling);
-                let url = 'https://script.google.com/macros/s/AKfycbyvAmZBAZlf6QoyP8EpYuJvd6N3BludV35BoQqy0okffQW23j5qR5TgioChQ_ZcTRwqGg/exec';
+                var filters = document.querySelector(".filters");
+                filters.parentNode.insertBefore(grid, filters.nextSibling);
+                let url = 'https://script.google.com/macros/s/AKfycbyA1R__4ESWeR4MXuVipk-_oVhh8ADSvtxRd6WzPkUqsogPOnUy-HRNoT8iObxdZUyoTg/exec';
                 let obj = await (await fetch(url)).json();
                 var objString = JSON.stringify(obj);
                 var galleryImages = JSON.parse(objString);
                 for (var i = 0; i < galleryImages.data.length; i++) {
                     var newImage = document.createElement("img");
                     newImage.src = "https://lh3.googleusercontent.com/d/" + galleryImages.data[i].img_id;
+                    newImage.alt = galleryImages.data[i].description;
                     var imageContainer = document.createElement("div");
                     imageContainer.classList.add("image");
                     grid.appendChild(imageContainer);
                     imageContainer.appendChild(newImage);
                 }
-                var images = document.querySelectorAll("img");
-                images.forEach(image => {
-                    image.addEventListener('click', function() {
-                        window.open(image.src);
-                    });
-                });
-
+                localStorage.clear();
+                var grid = document.querySelector(".grid");
+                var imageCache = grid.innerHTML;
+                localStorage.setItem("imageCache", imageCache);
+                setClickableImages();
                 function killLoader() {
                     var loadscreen = document.querySelector(".loadscreen");
                     loadscreen.parentNode.removeChild(loadscreen);
@@ -324,6 +368,35 @@
                 killLoader();
             }
             loadGallery();
+        });
+        function setClickableImages() {
+            var images = document.querySelectorAll("img");
+            images.forEach(image => {
+                image.addEventListener('click', function() {
+                    window.open(image.src);
+                });
+            });
+        }
+        var filters = document.querySelectorAll(".filterName");
+        filters.forEach(filter => {
+            filter.onclick = e => {
+                var selection = e.target.getAttribute("name");
+                if (selection === "all") {
+                    var imageCache = localStorage.getItem("imageCache");
+                    var replaceCache = document.querySelector(".grid").innerHTML = imageCache;
+                    setClickableImages();
+                } else {
+                    var imageCache = localStorage.getItem("imageCache");
+                    var replaceCache = document.querySelector(".grid").innerHTML = imageCache;
+                    var images = document.querySelectorAll("img");
+                    images.forEach(image => {
+                        if (image.getAttribute("alt").includes(selection) != true) {
+                            image.parentNode.remove();
+                        }
+                    });
+                    setClickableImages();
+                }
+            }
         });
     </script>
 </body>
