@@ -33,6 +33,11 @@
             overflow-x: hidden;
         }
 
+        .stop-scrolling {
+            height: 100%;
+            overflow: hidden;
+        }
+
         /*Loader*/
 
         .loadscreen {
@@ -179,17 +184,16 @@
             display: block;
             position: relative;
             margin-top: 40px;
-            margin-bottom: 80px;
             width: 100%;
-            height: auto;
             z-index: 99;
         }
 
         header h1 {
             display: block;
             position: relative;
-            margin-top: 0px;
-            margin-bottom: 20px;
+            margin: 0 auto;
+            padding-top: 20px;
+            padding-bottom: 40px;
             font-size: 40pt;
             font-family: "Pacifico";
             text-align: center;
@@ -199,6 +203,7 @@
         .headerIconsContainer {
             display: block;
             position: relative;
+            z-index: 999;
         }
 
         .headerIconsContainer .headerIcons {
@@ -220,24 +225,17 @@
             padding-right: 3px;
             font-size: 18pt;
             color: #FFFFFF;
-            border-radius: 20px;
         }
 
         .filters {
             display: block;
+            margin-top: -20px;
             position: relative;
             z-index: 999;
         }
 
-        .filters .filterList {
-            display: block;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
         .filters .filterName {
-            display: inline-block;
+            display: block;
             padding-bottom: 35px;
             padding-left: 10px;
             padding-right: 10px;
@@ -252,14 +250,44 @@
             opacity: 60%;
         }
 
+        .filters .dropbtn {
+            position: relative;
+            margin-bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 30pt;
+            border: none;
+            cursor: pointer;
+        }
+
+        .filters .dropdown-content {
+            display: none;
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f9f9f9;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .filters .dropdown-content a {
+            padding: 12px 16px;
+            display: block;
+            color: #202124 !important;
+            text-align: center;
+            border-bottom: 1px solid rgba(32, 33, 36, 0.1);
+        }
+
+        .filters .dropdown-content a:hover {
+            background: rgba(32, 33, 36, 0.1);
+        }
+
         @media screen and (max-width: 480px) {
             header h1 {
                 font-size: 28pt;
-            }
-
-            .filters .filterName {
-                padding-left: 5px;
-                padding-right: 5px;
             }
         }
 
@@ -273,7 +301,7 @@
             width: 100%;
             height: 80px;
             bottom: 0;
-            background-color: #1D1D1D;
+            background: #1D1D1D;
             z-index: -1;
         }
 
@@ -306,7 +334,6 @@
         </div>
     </div>
     <header>
-        <h1>Pictured By Isaac</h1>
         <div class="headerIconsContainer">
             <div class="headerIcons">
                 <a href="https://www.instagram.com/picturedbyisaac" target="_blank">
@@ -320,16 +347,18 @@
                 </a>
             </div>
         </div>
+        <h1>Pictured By Isaac</h1>
     </header>
     <div class="filters">
-        <ul class="filterList">
-            <li class="filterName" name="all">All</li>
-            <li class="filterName" name="nature">Nature</li>
-            <li class="filterName" name="wildlife">Wildlife</li>
-            <li class="filterName" name="architecture">Architecture</li>
-            <li class="filterName" name="street">Street</li>
-            <li class="filterName" name="">Portrait</li>
-        </ul>
+        <i class="dropbtn fa-solid fa-square-caret-down"></i>
+        <div class="dropdown-content">
+            <a class="filterName" name="all">all</a>
+            <a class="filterName" name="nature">nature</a>
+            <a class="filterName" name="wildlife">wildlife</a>
+            <a class="filterName" name="architecture">architecture</a>
+            <a class="filterName" name="street">street</a>
+            <a class="filterName" name="">portrait</a>
+        </div>
     </div>
     <div class="endOfImages">
         <h2>That's all folks!</h2>
@@ -406,6 +435,27 @@
                 }
             }
         });
+        var dropdown = document.querySelector(".dropbtn");
+        dropdownFilters = document.querySelector(".dropdown-content");
+        dropdownStatus = "closed";
+        dropdown.onclick = function() {
+            if (dropdownStatus === "closed") {
+                dropdown.classList.add("fa-square-caret-up");
+                dropdownFilters.style.display = "block";
+                document.body.classList.add("stop-scrolling");
+                setTimeout(function() {
+                    dropdownStatus = "open";
+                }, 100);
+            }
+            else {
+                dropdown.classList.remove("fa-square-caret-up");
+                dropdownFilters.style.display = "none";
+                document.body.classList.remove("stop-scrolling");
+                setTimeout(function() {
+                    dropdownStatus = "closed";
+                }, 100);
+            }
+        }
     </script>
 </body>
 
