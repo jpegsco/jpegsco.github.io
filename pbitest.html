@@ -204,6 +204,10 @@
             border-bottom: 0px;
         }
 
+        .filters .filterIcons {
+            pointer-events: none;
+        }
+
         .filters .selected {
             color: rgba(255, 255, 255, 1.0);
         }
@@ -342,14 +346,14 @@
         </div>
     </div>
     <div class="filters">
-        <i class="dropdown fa-sharp fa-solid fa-filter-list"></i>
+        <i class="dropdown fa-solid fa-filter-list"></i>
         <div class="dropdownContent">
-            <a class="filterName" name="all">all</a>
-            <a class="filterName" name="nature">nature</a>
-            <a class="filterName" name="wildlife">wildlife</a>
-            <a class="filterName" name="architecture">architecture</a>
-            <a class="filterName" name="street">street</a>
-            <a class="filterName" name="">portrait</a>
+            <a class="filterName" name="all"><i class="fa-solid fa-grid-2 filterIcons">&nbsp;</i>all</a>
+            <a class="filterName" name="nature"><i class="fa-solid fa-trees filterIcons">&nbsp;</i>nature</a>
+            <a class="filterName" name="wildlife"><i class="fa-solid fa-squirrel filterIcons"></i>&nbsp;</i>wildlife</a>
+            <a class="filterName" name="architecture"><i class="fa-solid fa-building filterIcons">&nbsp;</i>architecture</a>
+            <a class="filterName" name="street"><i class="fa-solid fa-users-viewfinder filterIcons"></i>&nbsp;</i>street</a>
+            <a class="filterName" name=""><i class="fa-solid fa-image-portrait filterIcons">&nbsp;</i>portrait</a>
         </div>
         <div class="dropdownBackground"></div>
     </div>
