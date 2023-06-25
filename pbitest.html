@@ -33,7 +33,7 @@
             overflow-x: hidden;
         }
 
-        .stop-scrolling {
+        .scrolljack {
             height: 100%;
             overflow: hidden;
         }
@@ -41,67 +41,25 @@
         /*Loader*/
 
         .loadscreen {
+            display: block;
             position: fixed;
             background-color: #202124;
             width: 100%;
             height: 100%;
             -webkit-transition: 0.5s ease-in-out;
             transition: 0.5s ease-in-out;
-            z-index: 10000;
+            z-index: 9999;
         }
 
-        .spinner {
-            position: relative;
-            left: 50%;
+        .loadscreen .loadingIcon {
+            display: block;
+            position: absolute;
             top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .spinner>div {
-            width: 18px;
-            height: 18px;
-            background-color: white;
-            border-radius: 100%;
-            display: inline-block;
-            -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-            animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-        }
-
-        .spinner .bounce1 {
-            -webkit-animation-delay: -0.32s;
-            animation-delay: -0.32s;
-        }
-
-        .spinner .bounce2 {
-            -webkit-animation-delay: -0.16s;
-            animation-delay: -0.16s;
-        }
-
-        @-webkit-keyframes sk-bouncedelay {
-            0%,
-            80%,
-            100% {
-                -webkit-transform: scale(0)
-            }
-
-            40% {
-                -webkit-transform: scale(1.0)
-            }
-        }
-
-        @keyframes sk-bouncedelay {
-            0%,
-            80%,
-            100% {
-                -webkit-transform: scale(0);
-                transform: scale(0);
-            }
-
-            40% {
-                -webkit-transform: scale(1.0);
-                transform: scale(1.0);
-            }
+            font-size: 55pt;
+            color: #FFFFFF;
+            z-index: 99999;
         }
 
         /*Gallery*/
@@ -342,10 +300,8 @@
 
 <body>
     <div class="loadscreen">
-        <div class="spinner">
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
+        <div class="loadingIcon">
+            <i class="fa-solid fa-camera fa-bounce"></i>
         </div>
     </div>
     <div class="filters">
@@ -435,7 +391,7 @@
                 dropdown.classList.add("fa-xmark-large");
                 dropdownContent.style.display = "block";
                 dropdownBackground.style.display = "block";
-                document.body.classList.add("stop-scrolling");
+                document.body.classList.add("scrolljack");
                 setTimeout(function() {
                     dropdownStatus = "open";
                 }, 100);
@@ -443,7 +399,7 @@
                 dropdown.classList.remove("fa-xmark-large");
                 dropdownContent.style.display = "none";
                 dropdownBackground.style.display = "none";
-                document.body.classList.remove("stop-scrolling");
+                document.body.classList.remove("scrolljack");
                 setTimeout(function() {
                     dropdownStatus = "closed";
                 }, 100);
