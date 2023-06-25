@@ -1,0 +1,331 @@
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Isaac Archambault's nature, portrait, street, and wildlife photography.">
+    <title>Pictured By Isaac | Gallery</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
+    <script src="https://kit.fontawesome.com/0027766915.js" crossorigin="anonymous"></script>
+    <style>
+        /*Loader*/
+
+        .loadscreen {
+            position: fixed;
+            background-color: #202124;
+            width: 100%;
+            height: 100%;
+            -webkit-transition: 0.5s ease-in-out;
+            transition: 0.5s ease-in-out;
+            z-index: 10000;
+        }
+
+        .spinner {
+            position: relative;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .spinner>div {
+            width: 18px;
+            height: 18px;
+            background-color: white;
+            border-radius: 100%;
+            display: inline-block;
+            -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+            animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        }
+
+        .spinner .bounce1 {
+            -webkit-animation-delay: -0.32s;
+            animation-delay: -0.32s;
+        }
+
+        .spinner .bounce2 {
+            -webkit-animation-delay: -0.16s;
+            animation-delay: -0.16s;
+        }
+
+        @-webkit-keyframes sk-bouncedelay {
+            0%,
+            80%,
+            100% {
+                -webkit-transform: scale(0)
+            }
+
+            40% {
+                -webkit-transform: scale(1.0)
+            }
+        }
+
+        @keyframes sk-bouncedelay {
+            0%,
+            80%,
+            100% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+
+            40% {
+                -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+            }
+        }
+
+        /*Gallery*/
+
+        html {
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FF0000;
+        }
+
+        body {
+            margin: 0;
+            background: #202124;
+            overflow-x: hidden;
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            margin: auto;
+            max-width: 1064px;
+        }
+
+        .grid .image {
+            width: calc(100% / 3);
+        }
+
+        .grid img {
+            position: relative;
+            margin: auto;
+            padding-top: 27px;
+            padding-bottom: 27px;
+            width: 300px;
+            height: 300px;
+            left: 50%;
+            transform: translateX(-50%);
+            object-fit: cover;
+        }
+
+        .endOfImages h2 {
+            display: block;
+            position: relative;
+            margin-top: 10px;
+            margin-bottom: 35px;
+            font-size: 18pt;
+            font-family: "Pacifico";
+            text-align: center;
+            color: white;
+        }
+
+        @media screen and (max-width: 1115px) {
+            .grid {
+                max-width: 854px;
+            }
+
+            .grid .image {
+                width: calc(100% / 2);
+            }
+
+            .grid img {
+                width: 372.5px;
+                height: 372.5px;
+            }
+        }
+
+        @media screen and (max-width: 905px) {
+            .grid {
+                max-width: 100%
+            }
+
+            .grid .image {
+                width: calc(100% / 2);
+            }
+
+            .grid img {
+                padding-top: 3.5vw;
+                padding-bottom: 3.5vw;
+                width: calc(100vw - 57vw);
+                height: calc(100vw - 57vw);
+            }
+
+            .endOfImages h2{
+                margin-bottom: 25px;
+            }
+        }
+
+        /*Header*/
+
+        header {
+            display: block;
+            position: relative;
+            margin-top: 40px;
+            margin-bottom: 80px;
+            width: 100%;
+            height: auto;
+            z-index: 999;
+            background: #202124;
+        }
+
+        header h1 {
+            display: block;
+            position: relative;
+            margin-top: 0px;
+            margin-bottom: 20px;
+            font-size: 40pt;
+            font-family: "Pacifico";
+            text-align: center;
+            color: white;
+        }
+
+        .headerIconsContainer {
+            display: block;
+            position: relative;
+        }
+
+        .headerIconsContainer .headerIcons {
+            display: block;
+            position: absolute;
+            margin: auto;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .headerIconsContainer .headerIcons a {
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .headerIconsContainer .headerIcons i {
+            display: block;
+            padding-left: 3px;
+            padding-right: 3px;
+            font-size: 18pt;
+            color: #FFFFFF;
+            border-radius: 20px;
+        }
+
+        @media screen and (max-width: 480px) {
+            header h1 {
+                font-size: 28pt;
+            }
+        }
+
+        /*Footer*/
+
+        footer {
+            display: block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 80px;
+            background-color: #1D1D1D;
+            z-index: 1;
+        }
+
+        footer a {
+            display: inline-block;
+            text-decoration: none;
+            color: #CCCCCC;
+        }
+
+        .footertext {
+            display: block;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFFFFF;
+            font-family: "Helvetica";
+            font-size: 12pt;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loadscreen">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <header>
+        <h1>Pictured By Isaac</h1>
+        <div class="headerIconsContainer">
+            <div class="headerIcons">
+                <a href="https://www.instagram.com/picturedbyisaac" target="_blank">
+                    <i class="fa-brands fa-square-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/isaacarchambault" target="_blank">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://www.yourb.io/isaac" target="_blank">
+                    <i class="fa-solid fa-link"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="endOfImages">
+        <h2>That's all folks!</h2>
+    </div>
+    <footer>
+        <div class="footertext">Copyright © 2023 <a href="https://yourb.io/isaac">Isaac Archambault</a></div>
+    </footer>
+    <script>
+        window.addEventListener("load", (event) => {
+            async function loadGallery() {
+                var grid = document.createElement("div");
+                grid.classList.add("grid");
+                var header = document.querySelector("header");
+                header.parentNode.insertBefore(grid, header.nextSibling);
+                let url = 'https://script.google.com/macros/s/AKfycbyvAmZBAZlf6QoyP8EpYuJvd6N3BludV35BoQqy0okffQW23j5qR5TgioChQ_ZcTRwqGg/exec';
+                let obj = await (await fetch(url)).json();
+                var objString = JSON.stringify(obj);
+                var galleryImages = JSON.parse(objString);
+                for (var i = 0; i < galleryImages.data.length; i++) {
+                    var newImage = document.createElement("img");
+                    newImage.src = "https://lh3.googleusercontent.com/d/" + galleryImages.data[i].img_id;
+                    var imageContainer = document.createElement("div");
+                    imageContainer.classList.add("image");
+                    grid.appendChild(imageContainer);
+                    imageContainer.appendChild(newImage);
+                }
+                var images = document.querySelectorAll("img");
+                images.forEach(image => {
+                    image.addEventListener('click', function() {
+                        window.open(image.src);
+                    });
+                });
+
+                function killLoader() {
+                    var loadscreen = document.querySelector(".loadscreen");
+                    loadscreen.parentNode.removeChild(loadscreen);
+                }
+                killLoader();
+            }
+            loadGallery();
+        });
+    </script>
+</body>
+
+</html>
