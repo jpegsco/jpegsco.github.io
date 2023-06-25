@@ -11,7 +11,7 @@
     <link rel="manifest" href="./site.webmanifest">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans">
-    <script src="https://kit.fontawesome.com/0027766915.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0e61fd2654.js" crossorigin="anonymous"></script>
     <style>
         html {
             overflow: scroll;
@@ -79,7 +79,6 @@
         }
 
         @-webkit-keyframes sk-bouncedelay {
-
             0%,
             80%,
             100% {
@@ -92,7 +91,6 @@
         }
 
         @keyframes sk-bouncedelay {
-
             0%,
             80%,
             100% {
@@ -173,59 +171,12 @@
                 height: calc(100vw - 57vw);
             }
 
-            .endOfImages h2{
+            .endOfImages h2 {
                 margin-bottom: 25px;
             }
         }
 
-        /*Header*/
-
-        header {
-            display: block;
-            position: relative;
-            margin-top: 40px;
-            width: 100%;
-            z-index: 99;
-        }
-
-        header h1 {
-            display: block;
-            position: relative;
-            margin: 0 auto;
-            padding-top: 20px;
-            padding-bottom: 20px;
-            font-size: 40pt;
-            font-family: "Pacifico";
-            text-align: center;
-            color: white;
-        }
-
-        .headerIconsContainer {
-            display: block;
-            position: relative;
-            z-index: 999;
-        }
-
-        .headerIconsContainer .headerIcons {
-            display: block;
-            position: absolute;
-            margin: auto;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .headerIconsContainer .headerIcons a {
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .headerIconsContainer .headerIcons i {
-            display: block;
-            padding-left: 3px;
-            padding-right: 3px;
-            font-size: 18pt;
-            color: #FFFFFF;
-        }
+        /*Menu*/
 
         .filters {
             position: relative;
@@ -293,6 +244,55 @@
             z-index: 1;
         }
 
+        /*Header*/
+
+        header {
+            display: block;
+            position: relative;
+            margin-top: 40px;
+            width: 100%;
+            z-index: 99;
+        }
+
+        header h1 {
+            display: block;
+            position: relative;
+            margin: 0 auto;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            font-size: 40pt;
+            font-family: "Pacifico";
+            text-align: center;
+            color: white;
+        }
+
+        .headerIconsContainer {
+            display: block;
+            position: relative;
+            z-index: 999;
+        }
+
+        .headerIconsContainer .headerIcons {
+            display: block;
+            position: absolute;
+            margin: auto;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .headerIconsContainer .headerIcons a {
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .headerIconsContainer .headerIcons i {
+            display: block;
+            padding-left: 3px;
+            padding-right: 3px;
+            font-size: 20pt;
+            color: #FFFFFF;
+        }
+
         @media screen and (max-width: 480px) {
             header h1 {
                 font-size: 28pt;
@@ -342,7 +342,7 @@
         </div>
     </div>
     <div class="filters">
-        <i class="dropdown fa-solid fa-bars"></i>
+        <i class="dropdown fa-sharp fa-solid fa-filter-list"></i>
         <div class="dropdownContent">
             <a class="filterName" name="all">all</a>
             <a class="filterName" name="nature">nature</a>
@@ -363,7 +363,7 @@
                     <i class="fa-brands fa-linkedin"></i>
                 </a>
                 <a href="https://www.yourb.io/isaac" target="_blank">
-                    <i class="fa-solid fa-link"></i>
+                    <i class="fa-sharp fa-link-horizontal"></i>
                 </a>
             </div>
         </div>
@@ -400,6 +400,7 @@
                 var imageCache = grid.innerHTML;
                 localStorage.setItem("imageCache", imageCache);
                 setClickableImages();
+
                 function killLoader() {
                     var loadscreen = document.querySelector(".loadscreen");
                     loadscreen.parentNode.removeChild(loadscreen);
@@ -408,6 +409,7 @@
             }
             loadGallery();
         });
+
         function setClickableImages() {
             var images = document.querySelectorAll("img");
             images.forEach(image => {
@@ -416,6 +418,31 @@
                 });
             });
         }
+        var dropdown = document.querySelector(".dropdown");
+        var dropdownContent = document.querySelector(".dropdownContent");
+        var dropdownBackground = document.querySelector(".dropdownBackground");
+        dropdownStatus = "closed";
+
+        function dropdownToggle() {
+            if (dropdownStatus === "closed") {
+                dropdown.classList.add("fa-xmark-large");
+                dropdownContent.style.display = "block";
+                dropdownBackground.style.display = "block";
+                document.body.classList.add("stop-scrolling");
+                setTimeout(function() {
+                    dropdownStatus = "open";
+                }, 100);
+            } else {
+                dropdown.classList.remove("fa-xmark-large");
+                dropdownContent.style.display = "none";
+                dropdownBackground.style.display = "none";
+                document.body.classList.remove("stop-scrolling");
+                setTimeout(function() {
+                    dropdownStatus = "closed";
+                }, 100);
+            }
+        }
+        dropdown.addEventListener('click', dropdownToggle);
         var filters = document.querySelectorAll(".filterName");
         filters[0].classList.add("selected");
         filters.forEach(filter => {
@@ -431,6 +458,7 @@
                     var imageCache = localStorage.getItem("imageCache");
                     var replaceCache = document.querySelector(".grid").innerHTML = imageCache;
                     setClickableImages();
+                    dropdownToggle();
                 } else {
                     var imageCache = localStorage.getItem("imageCache");
                     var replaceCache = document.querySelector(".grid").innerHTML = imageCache;
@@ -441,33 +469,10 @@
                         }
                     });
                     setClickableImages();
+                    dropdownToggle();
                 }
             }
         });
-        var dropdown = document.querySelector(".dropdown");
-        var dropdownContent = document.querySelector(".dropdownContent");
-        var dropdownBackground = document.querySelector(".dropdownBackground");
-        dropdownStatus = "closed";
-        dropdown.onclick = function() {
-            if (dropdownStatus === "closed") {
-                dropdown.classList.add("fa-xmark");
-                dropdownContent.style.display = "block";
-                dropdownBackground.style.display = "block";
-                document.body.classList.add("stop-scrolling");
-                setTimeout(function() {
-                    dropdownStatus = "open";
-                }, 100);
-            }
-            else {
-                dropdown.classList.remove("fa-xmark");
-                dropdownContent.style.display = "none";
-                dropdownBackground.style.display = "none";
-                document.body.classList.remove("stop-scrolling");
-                setTimeout(function() {
-                    dropdownStatus = "closed";
-                }, 100);
-            }
-        }
     </script>
 </body>
 
