@@ -184,14 +184,14 @@
             margin-top: 20px;
             margin-bottom: 80px;
             width: 100%;
-            z-index: 999;
+            z-index: 99;
         }
 
         .filters .filterName {
             display: block;
             position: relative;
-            padding-top: calc(100vh / 24);
-            padding-bottom: calc(100vh / 24);
+            padding-top: calc(100vh / 33.33);
+            padding-bottom: calc(100vh / 33.33);
             font-family: "Open Sans", sans-serif;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.6);
@@ -199,7 +199,7 @@
             cursor: pointer;
             text-transform: uppercase;
             border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-            z-index: 999;
+            z-index: 99;
         }
 
         .filters .filterName:last-child {
@@ -232,8 +232,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(32, 33, 36, 0.8);
-            z-index: 999;
+            /*background: rgba(32, 33, 36, 0.8);*/
+            z-index: 99;
         }
 
         .filters .dropdownBackground {
@@ -244,7 +244,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(62, 63, 66, 0.6);
+            background: rgba(32, 33, 36, 0.8);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             z-index: 1;
@@ -257,7 +257,6 @@
             position: relative;
             margin-top: 40px;
             width: 100%;
-            z-index: 99;
         }
 
         header h1 {
@@ -270,12 +269,12 @@
             font-family: "Pacifico";
             text-align: center;
             color: white;
+            z-index: -1;
         }
 
         .headerIconsContainer {
             display: block;
             position: relative;
-            z-index: 999;
         }
 
         .headerIconsContainer .headerIcons {
