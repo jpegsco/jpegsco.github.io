@@ -200,16 +200,23 @@
                     });
                 });
             };
-
-            document.getElementById('downloadButton').addEventListener('click', function() {
-                google.script.run.withSuccessHandler(function(response) {
-                window.open(response.downloadLink);
-                }).doGet({ fid: sessionStorage.getItem(folderID) });
-            });
-            
         });
     </script>
     <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        function initGoogleApi() {
+    // Your code that uses the `google` object
+    console.log('Google API loaded successfully');
+    document.getElementById('downloadButton').addEventListener('click', function() {
+        google.script.run.withSuccessHandler(function(response) {
+            window.open(response.downloadLink);
+        }).doGet({ fid: sessionStorage.getItem(folderID) });
+    });
+}
+
+// Load the Google API client library and execute the callback function
+gapi.load('client', initGoogleApi);
+</script>
 </body>
 
 </html>
