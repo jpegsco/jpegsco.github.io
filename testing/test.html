@@ -184,11 +184,8 @@
                     // document.body.insertBefore(h1, document.body.firstChild);
                     // setClickableImages();
                     // document.querySelector(".gallery-loader-container").remove();
-                    document.getElementById('downloadButton').addEventListener('click', function() {
-                    google.script.run.withSuccessHandler(function(response) {
-                    window.open(response.downloadLink);
-                    }).doGet({ fid: `${galleryImages.data[1].gallery_link}` });
-                    });
+                    var folderID = galleryImages.data[1].gallery_link;
+                    sessionStorage.setItem("folderIDValue", folderID);
                 } catch (error) {
                     alert("ERROR: Invalid or partial gallery ID. The gallery could not be loaded. If the issue persists, please contact the owner of the site.");
                     window.location.reload();
@@ -203,8 +200,16 @@
                     });
                 });
             };
+
+            document.getElementById('downloadButton').addEventListener('click', function() {
+                google.script.run.withSuccessHandler(function(response) {
+                window.open(response.downloadLink);
+                }).doGet({ fid: sessionStorage.getItem(folderID) });
+            });
+            
         });
     </script>
+    <script src="https://apis.google.com/js/api.js"></script>
 </body>
 
 </html>
