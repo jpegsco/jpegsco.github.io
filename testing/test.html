@@ -170,21 +170,24 @@
                     var grid = document.createElement("div");
                     grid.classList.add("grid");
                     document.body.insertBefore(grid, document.body.firstChild);
-                    // for (var i = 0; i < galleryImages.data[2].length; i++) {
-                    //     var newImage = document.createElement("img");
-                    //     newImage.src = "https://lh3.googleusercontent.com/d/" + galleryImages.data[2][i].img_id;
-                    //     newImage.alt = galleryImages.data[2][i].description;
-                    //     var imageContainer = document.createElement("div");
-                    //     imageContainer.classList.add("image");
-                    //     grid.appendChild(imageContainer);
-                    //     imageContainer.appendChild(newImage);
-                    // };
-                    // var h1 = document.createElement("h1");
-                    // h1.innerText = galleryImages.data[0].gallery_title;
-                    // h1.style.color = "#FFFFFF";
-                    // document.body.insertBefore(h1, document.body.firstChild);
-                    // setClickableImages();
-                    // document.querySelector(".gallery-loader-container").remove();
+                    for (var i = 0; i < galleryImages.data.files.length; i++) {
+                        var newImage = document.createElement("img");
+                        newImage.src = "https://lh3.googleusercontent.com/d/" + galleryImages.data.files[i].img_id;
+                        newImage.alt = galleryImages.data.files[i].description;
+                        var imageContainer = document.createElement("div");
+                        imageContainer.classList.add("image");
+                        grid.appendChild(imageContainer);
+                        imageContainer.appendChild(newImage);
+                    };
+                    var h1 = document.createElement("h1");
+                    h1.innerText = galleryImages.data.gallery_title;
+                    h1.style.color = "#FFFFFF";
+                    document.body.insertBefore(h1, document.body.firstChild);
+                    document.querySelector("h1").onclick = function() {
+                        window.open(`https://drive.google.com/uc?export=download&id=${galleryImages.data.zip_file_id}`);
+                    }
+                    setClickableImages();
+                    document.querySelector(".gallery-loader-container").remove();
                 } catch (error) {
                     alert("ERROR: Invalid or partial gallery ID. The gallery could not be loaded. If the issue persists, please contact the owner of the site.");
                     window.location.reload();
@@ -199,35 +202,6 @@
                     });
                 });
             };
-
-            // document.getElementById('downloadButton').addEventListener('click', function() {
-            // console.log(window.google);
-            // // // Call your Google Apps Script function directly here
-            // // google.script.run.withSuccessHandler(function(response) {
-            // // window.open(response.downloadLink);
-            // // }).doGet({ fid: sessionStorage.getItem(folderID) });
-            // });
-
-            document.getElementById('downloadButton').addEventListener('click', function() {
-                console.log("hello");
-            // Make an HTTP request to the Google Apps Script web app URL
-            fetch('https://script.google.com/macros/s/AKfycbw4Z-eiiT5_lAXx3EaLECip9YQFxcPOgpmu0PklSXAtLd7DI2yhT8jsDzEJq0n6N6Kf/exec')
-                .then(response => response.json())
-                .then(data => {
-                    // Decode the base64-encoded zip file contents
-                    var zipData = window.atob(data.zipData);
-                    // Convert the binary string to a Blob
-                    var zipBlob = new Blob([zipData], { type: 'application/zip' });
-                    // Create a temporary link to trigger the download
-                    var link = document.createElement('a');
-                    link.href = URL.createObjectURL(zipBlob);
-                    link.download = 'images.zip';
-                    // Trigger the click event on the link
-                    link.click();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
         });
     </script>
 </body>
