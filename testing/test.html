@@ -163,6 +163,7 @@
                 try {
                     var galleryID = atob(document.querySelector("#galleryID").value);
                     var url = `https://script.google.com/macros/s/${galleryID}/exec`;
+                    sessionStorage.setItem("galleryIDValue", galleryID);
                     let obj = await (await fetch(url)).json();
                     let objString = JSON.stringify(obj);
                     var galleryImages = JSON.parse(objString);
@@ -184,8 +185,6 @@
                     // document.body.insertBefore(h1, document.body.firstChild);
                     // setClickableImages();
                     // document.querySelector(".gallery-loader-container").remove();
-                    var folderID = galleryImages.data[1].gallery_link;
-                    sessionStorage.setItem("folderIDValue", folderID);
                 } catch (error) {
                     alert("ERROR: Invalid or partial gallery ID. The gallery could not be loaded. If the issue persists, please contact the owner of the site.");
                     window.location.reload();
@@ -200,23 +199,35 @@
                     });
                 });
             };
+
+            // document.getElementById('downloadButton').addEventListener('click', function() {
+            // console.log(window.google);
+            // // // Call your Google Apps Script function directly here
+            // // google.script.run.withSuccessHandler(function(response) {
+            // // window.open(response.downloadLink);
+            // // }).doGet({ fid: sessionStorage.getItem(folderID) });
+            // });
+
+                // Function to trigger the download
+function downloadImagesAsZip() {
+    // Make a request to the web app URL
+    fetch("https://script.google.com/macros/s/AKfycbyzLlFCwbtBALeB2I87P_dbIwtR93V0itogfs1ILRuBI1vWUWlouyZTq9QuO6RsdBdc/exec")
+        .then(response => response.text())
+        .then(downloadLink => {
+            // Open the download link in a new tab to trigger the download
+            localStorage.clear();
+            window.open(downloadLink);
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
-    </script>
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-        function initGoogleApi() {
-    // Your code that uses the `google` object
-    console.log('Google API loaded successfully');
-    document.getElementById('downloadButton').addEventListener('click', function() {
-        google.script.run.withSuccessHandler(function(response) {
-            window.open(response.downloadLink);
-        }).doGet({ fid: sessionStorage.getItem(folderID) });
-    });
 }
 
-// Load the Google API client library and execute the callback function
-gapi.load('client', initGoogleApi);
-</script>
+// Call the function to trigger the download when a button is clicked
+document.getElementById('downloadButton').addEventListener('click', downloadImagesAsZip);
+
+        });
+    </script>
 </body>
 
 </html>
