@@ -162,7 +162,6 @@
                 try {
                     var galleryID = atob(document.querySelector("#galleryID").value);
                     var url = `https://script.google.com/macros/s/${galleryID}/exec`;
-                    sessionStorage.setItem("galleryIDValue", galleryID);
                     let obj = await (await fetch(url)).json();
                     let objString = JSON.stringify(obj);
                     var galleryImages = JSON.parse(objString);
