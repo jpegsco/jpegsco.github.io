@@ -208,23 +208,26 @@
             // // }).doGet({ fid: sessionStorage.getItem(folderID) });
             // });
 
-                // Function to trigger the download
-function downloadImagesAsZip() {
-    // Make a request to the web app URL
-    fetch("https://script.google.com/macros/s/AKfycbwb8pzePfRTSSs_pCRBMywyMzeZ-AqF5XUuSOdrDjUKjXH5Vn2405lKjEnlsKxNYZhr/exec")
-        .then(response => response.text())
-        .then(downloadLink => {
-            // Open the download link in a new tab to trigger the download
-            localStorage.clear();
-            window.open(downloadLink);
-        })
-        .catch(error => {
-            console.error('Error:', error);
+            document.getElementById('downloadButton').addEventListener('click', function() {
+            // Make an HTTP request to the Google Apps Script web app URL
+            fetch('https://script.google.com/macros/s/AKfycbwb8pzePfRTSSs_pCRBMywyMzeZ-AqF5XUuSOdrDjUKjXH5Vn2405lKjEnlsKxNYZhr/exec')
+                .then(response => response.text())
+                .then(base64Zip => {
+                    // Decode the base64-encoded zip file contents
+                    var zipData = atob(base64Zip);
+                    // Convert the binary string to a Blob
+                    var zipBlob = new Blob([zipData], { type: 'application/zip' });
+                    // Create a temporary link to trigger the download
+                    var link = document.createElement('a');
+                    link.href = URL.createObjectURL(zipBlob);
+                    link.download = 'images.zip';
+                    // Trigger the click event on the link
+                    link.click();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         });
-}
-
-// Call the function to trigger the download when a button is clicked
-document.getElementById('downloadButton').addEventListener('click', downloadImagesAsZip);
 
         });
     </script>
