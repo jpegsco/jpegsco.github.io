@@ -209,12 +209,13 @@
             // });
 
             document.getElementById('downloadButton').addEventListener('click', function() {
+                console.log("hello");
             // Make an HTTP request to the Google Apps Script web app URL
-            fetch('https://script.google.com/macros/s/AKfycbxVH0iTik5QmZ1nu80U7-z4V41woIAnfy-5a0R0SVSQC-sfOBXuSs0mqkZ-QLVYtq83/exec')
-                .then(response => response.text())
-                .then(base64Zip => {
+            fetch('https://script.google.com/macros/s/AKfycbw4Z-eiiT5_lAXx3EaLECip9YQFxcPOgpmu0PklSXAtLd7DI2yhT8jsDzEJq0n6N6Kf/exec')
+                .then(response => response.json())
+                .then(data => {
                     // Decode the base64-encoded zip file contents
-                    var zipData = atob(base64Zip);
+                    var zipData = window.atob(data.zipData);
                     // Convert the binary string to a Blob
                     var zipBlob = new Blob([zipData], { type: 'application/zip' });
                     // Create a temporary link to trigger the download
@@ -227,8 +228,6 @@
                 .catch(error => {
                     console.error('Error:', error);
                 });
-        });
-
         });
     </script>
 </body>
